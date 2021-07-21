@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FE Tech interview</title>
+    <script
+      src="https://kit.fontawesome.com/10045edef8.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      .button {
+        background: #4caf50;
+        color: white;
+        border: none;
+        height: 50px;
+        width: 150px;
+        margin-top: 20px;
+        margin-left: 20px;
+      }
+      .background1 {
+        background: #ffdfc2;
+        height: auto;
+      }
+
+      #quoteResult {
+        background: white;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 20px;
+        height: auto;
+        display: flex;
+        align-items: center;
+        color: black;
+      }
+
+      #tags {
+        margin-left: 20px;
+        margin-top: 20px;
+        padding-bottom: 20px;
+      }
+      .fas {
+        color: gray;
+        font-size: 25px;
+        padding-left: 20px;
+        padding-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Lets generate quote</h1>
+    <div class="background1">
+      <form>
+        <input
+          class="button"
+          type="button"
+          value="Generate Quote"
+          onclick="fetchQuote()"
+        />
+      </form>
+      <div id="quoteResult" class="fas fa-quote-left"></div>
+      <div id="tags"></div>
+    </div>
+
+    <script>
+      //   window.onload = () => {
+      //     fetchQuote();
+      //   };
+
+      const fetchQuote = () => {
+        fetch("https://quotes.rest/qod?language=en")
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.contents);
+            document.querySelector("#quoteResult").innerText =
+              data.contents.quotes[0].quote;
+            document.querySelector("#tags").innerText =
+              data.contents.quotes[0].tags;
+          });
+      };
+    </script>
+  </body>
+</html>
